@@ -8,7 +8,7 @@ const authController = require("../controllers/auth");
 const router = express.Router();
 
 router.put(
-  "/singup",
+  "/signup",
   [
     check("email")
       .isEmail()
@@ -32,7 +32,7 @@ router.put(
         "Please enter a name with at least 2 and at most 100 characters",
       ),
   ],
-  authController.singup,
+  authController.signup,
 );
 
 router.post('/login', authController.login);
