@@ -128,4 +128,9 @@ describe("Authentication Middleware", function () {
     
     jwt.verify.restore();
   });
+
+  // ❌ INTENTIONALLY FAILING TEST - TO DEMONSTRATE CI/CD BLOCKING
+  it("should INTENTIONALLY FAIL - GitHub will block this!", function () {
+    expect(1).to.equal(2); 
+  });
 });
