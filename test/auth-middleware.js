@@ -63,13 +63,13 @@ describe("Authentication Middleware", function () {
     };
     const res = {};
     const next = sinon.spy();
-    
+
     sinon.stub(jwt, "verify");
     jwt.verify.returns({ userId: "123" });
-    
+
     authMiddleware(req, res, next);
     expect(next.calledOnce).to.be.true;
-    
+
     jwt.verify.restore();
   });
 
@@ -81,13 +81,13 @@ describe("Authentication Middleware", function () {
     };
     const res = {};
     const next = function () {};
-    
+
     sinon.stub(jwt, "verify");
     jwt.verify.returns({ userId: "user456" });
-    
+
     authMiddleware(req, res, next);
     expect(req.userId).to.equal("user456");
-    
+
     jwt.verify.restore();
   });
 
@@ -99,7 +99,7 @@ describe("Authentication Middleware", function () {
     };
     const res = {};
     const next = function () {};
-    
+
     try {
       authMiddleware(req, res, next);
     } catch (err) {
@@ -115,18 +115,17 @@ describe("Authentication Middleware", function () {
     };
     const res = {};
     const next = function () {};
-    
+
     sinon.stub(jwt, "verify");
     jwt.verify.returns(null);
-    
+
     try {
       authMiddleware(req, res, next);
     } catch (err) {
       expect(err.statusCode).to.equal(401);
       expect(err.message).to.equal("Not authenticated.");
     }
-    
+
     jwt.verify.restore();
   });
-
 });
