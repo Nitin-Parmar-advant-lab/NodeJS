@@ -1,7 +1,9 @@
-import {serve} from "https://deno.land/std/http/server.ts"
+import { Application } from "https://deno.land/x/oak/mod.ts";
 
-const server = serve({port: 3000})
+const app = new Application();
 
-for await (const req of server) {
-  req.respond({body: "Hello, ME!"})
-}
+app.use((ctx) => {
+  ctx.response.body = "Hello CFW!";
+});
+
+export default { fetch: app.fetch };
